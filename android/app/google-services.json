@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "934422922867",
+    "project_id": "event-go-4097d",
+    "storage_bucket": "event-go-4097d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934422922867:android:e555e985e5060a4bf9cc06",
+        "android_client_info": {
+          "package_name": "com.example.eventgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdKImqMPskHjF_VPtvfyN5Cgd8_Uud2YE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
