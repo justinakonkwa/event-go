@@ -1,3 +1,4 @@
+import 'package:eventgo/Help_page.dart';
 import 'package:eventgo/widgets/app_text.dart';
 import 'package:eventgo/widgets/app_text_large.dart';
 import 'package:eventgo/widgets/bouton_next.dart';
@@ -32,6 +33,15 @@ class _AddEventState extends State<AddEvent> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                 const CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.black12,
+                    child: Icon(CupertinoIcons.arrow_up_square_fill,color: Colors.grey,size: 40,),
+                  ),
+                  // SizedBox(
+                  //   height: 150.0,
+                  //   child: Image.asset('assets/ticket.png'),
+                  // ),
                   AppTextLarge(
                     text:
                         "Connecte-toi ou crée un compte pour vendre tes billets en un clin d'oeil !",
@@ -43,7 +53,8 @@ class _AddEventState extends State<AddEvent> {
                     color: Colors.black,
                     width: 200,
                     onTap: () {},
-                    child: AppText(
+                    child: AppTextLarge(
+                      size: 14,
                       text: "S'inscrire ou se connecter",
                       color: Colors.white,
                     ),
@@ -57,9 +68,16 @@ class _AddEventState extends State<AddEvent> {
                 border: Border.all(color: Colors.grey),
               ),
               child: ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HelpScreen(),
+                    ),
+                  );
+                },
                 title: AppTextLarge(
-                  text: "C'est la première fois que tu vend ?",
+                  text: "C'est la première fois que tu vends ?",
                   size: 16,
                   textAlign: TextAlign.start,
                 ),

@@ -18,11 +18,15 @@ class _HomePageState extends State<HomePage> {
           preferredSize: Size.fromHeight(150.0),
           child: AppBar(
             automaticallyImplyLeading: false,
-            title: AppTextLarge(text: 'Event Go',size: 30,),
+            title: AppTextLarge(
+              text: 'Event Go',
+              size: 30,
+            ),
             centerTitle: false,
             flexibleSpace: Padding(
               padding: const EdgeInsets.only(
-                top: 80.0, // Ajuste la position de la barre de recherche sous le titre
+                top:
+                    80.0, // Adjusts the position of the search bar under the title
                 left: 20.0,
                 right: 20.0,
               ),
@@ -35,11 +39,10 @@ class _HomePageState extends State<HomePage> {
                 placeholder: 'Recherche des artistes, lieux, événements...',
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                prefix: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                prefix: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Icon(
                     CupertinoIcons.search,
                   ),
@@ -53,14 +56,13 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              AppTextLarge(text:' Trouve ton prochain Evénement'),
-          SizedBox(height: 20,),
-               Row(
+              AppTextLarge(text: 'Trouve ton prochain Événement'),
+              SizedBox(height: 20),
+              Row(
                 children: [
                   EventCard(
                     text: "Aujourd'hui",
-                    icon: Icons.calendar_month,
+                    icon: Icons.calendar_today,
                   ),
                   Spacer(),
                   EventCard(
@@ -69,48 +71,64 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-               sizedbox,
-               Row(
+              SizedBox(height: 20),
+              Row(
                 children: [
                   EventCard(
-                    text: "ce week-end",
+                    text: "Ce week-end",
                     icon: Icons.calendar_month,
                   ),
                   Spacer(),
                   EventCard(
-                    text: "tous évenements",
+                    text: "Tous événements",
                     icon: Icons.calendar_today,
                   ),
                 ],
               ),
-          SizedBox(height: 20,),
-          AppTextLarge(text: 'Event-Go Magazine'),
-          sizedbox,
-          AppText(text: '''Nos événements organisés , interviews et plus
-encore.
-          '''),
-          Container(
-            height: MediaQuery.of(context).size.width * 0.55, // Hauteur pour le conteneur contenant la ListView
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5, // Nombre d'éléments dans la liste
-              itemBuilder: (context, index) {
-                return Container(
-                  width: MediaQuery.of(context).size.width * 0.8, // Largeur du conteneur
-                  margin: EdgeInsets.symmetric(horizontal: 8.0), // Espacement horizontal entre les conteneurs
-                  decoration: BoxDecoration(
-                    color:  Colors.grey[200],// Couleur de fond des conteneurs
-                    borderRadius: BorderRadius.circular(20), // Coins arrondis
-                  ),
-                  child: Center(
-                    child: AppText(text:
-                      'Item $index',
-
-                    ),
-                  ),
-                );
-              },
-            )),
+              SizedBox(height: 20),
+              AppTextLarge(text: 'Event-Go Magazine'),
+              SizedBox(height: 20),
+              AppText(
+                text:
+                    '''Nos événements organisés, interviews et plus encore.''',
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: MediaQuery.of(context).size.width *
+                    0.55, // Height for the container with ListView
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5, // Number of items in the list
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width *
+                              0.8, // Width of the container
+                          height: MediaQuery.of(context).size.width * 0.5,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal:
+                                  8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[
+                                200],
+                            borderRadius:
+                                BorderRadius.circular(20), // Rounded corners
+                          ),
+                          child: Center(
+                            child: AppText(
+                              text: 'Item $index',
+                            ),
+                          ),
+                        ),
+                        AppText(
+                          text: 'Double stade de France avec le rappeur Ninho',
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
@@ -119,19 +137,17 @@ encore.
   }
 }
 
-
 class EventCard extends StatelessWidget {
   final String text;
   final IconData icon;
 
-  // Constructeur pour initialiser les paramètres
+  // Constructor to initialize parameters
   EventCard({required this.text, required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-
       height: 50.0,
       width: MediaQuery.of(context).size.width * 0.44,
       decoration: BoxDecoration(
