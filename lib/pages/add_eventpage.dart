@@ -22,18 +22,54 @@ class _AddEventState extends State<AddEvent> {
           text: 'Vendre des Billets',
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 20),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            AppTextLarge(text: "Tu n'as pas encore vendu de billets",size: 16,),
-            sizedbox,
-            NextButton(
-              color: Colors.black,
-              width: 200,
-              onTap: () {},
-              child: AppText(text: 'Commenecer à vendre',color: Colors.white,),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppTextLarge(
+                    text:
+                        "Connecte-toi ou crée un compte pour vendre tes billets en un clin d'oeil !",
+                    size: 16,
+                    textAlign: TextAlign.center,
+                  ),
+                  sizedbox,
+                  NextButton(
+                    color: Colors.black,
+                    width: 200,
+                    onTap: () {},
+                    child: AppText(
+                      text: "S'inscrire ou se connecter",
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                border: Border.all(color: Colors.grey),
+              ),
+              child: ListTile(
+                onTap: () {},
+                title: AppTextLarge(
+                  text: "C'est la première fois que tu vend ?",
+                  size: 16,
+                  textAlign: TextAlign.start,
+                ),
+                subtitle: AppText(
+                    text:
+                        "Pas de stress ! Découvre nos petits conseils sur tout ce qur tu dois savoir",
+                    color: Colors.grey),
+                trailing: const Icon(CupertinoIcons.chevron_compact_right),
+              ),
+            )
           ],
         ),
       ),

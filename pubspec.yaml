@@ -96,6 +96,11 @@ flutter:
       fonts:
         - asset: fonts/DMSans-Regular.ttf
         - asset: fonts/DMSans-Bold.ttf
+    - family: Outfit
+      fonts:
+        - asset: fonts/Outfit-ExtraLight.ttf
+        - asset: fonts/Outfit-Medium.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:
