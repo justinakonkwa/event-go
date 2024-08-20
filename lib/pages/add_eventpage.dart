@@ -1,4 +1,5 @@
 import 'package:eventgo/Help_page.dart';
+import 'package:eventgo/authent/signup_page.dart';
 import 'package:eventgo/widgets/app_text.dart';
 import 'package:eventgo/widgets/app_text_large.dart';
 import 'package:eventgo/widgets/bouton_next.dart';
@@ -36,7 +37,7 @@ class _AddEventState extends State<AddEvent> {
                  const CircleAvatar(
                     radius: 40,
                     backgroundColor: Colors.black12,
-                    child: Icon(CupertinoIcons.arrow_up_square_fill,color: Colors.grey,size: 40,),
+                    child: Icon(CupertinoIcons.tickets_fill,color: Colors.grey,size: 40,),
                   ),
                   // SizedBox(
                   //   height: 150.0,
@@ -52,7 +53,20 @@ class _AddEventState extends State<AddEvent> {
                   NextButton(
                     color: Colors.black,
                     width: 200,
-                    onTap: () {},
+                    onTap: () {
+                      showModalBottomSheet(
+
+                        backgroundColor:
+                        Theme.of(context).colorScheme.background,
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext context) {
+                          return  Container(
+                              height:MediaQuery.of(context).size.height * 0.45,
+                              child: SignupPage());
+                        },
+                      );
+                    },
                     child: AppTextLarge(
                       size: 14,
                       text: "S'inscrire ou se connecter",

@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: '/intro',
         routes: {
           '/intro': (context) => const Intro(),
-          '/signup': (context) => const SignUpPage(),
+          '/signup': (context) => const SignupPage(),
           // '/login': (context) => const LoginPage(),
           // '/
           // '/purchase': (context) => PaywallPage(),
