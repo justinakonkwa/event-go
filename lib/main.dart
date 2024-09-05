@@ -1,7 +1,5 @@
 
-import 'package:eventgo/authent/forget_page.dart';
-import 'package:eventgo/authent/login_page.dart';
-import 'package:eventgo/authent/signup_page.dart';
+
 import 'package:eventgo/intro/Intro.dart';
 import 'package:eventgo/language/language_preferences.dart';
 import 'package:eventgo/widgets/theme_provider.dart';
@@ -68,7 +66,7 @@ class _MyAppState extends State<MyApp> {
         initialRoute: '/intro',
         routes: {
           '/intro': (context) => const Intro(),
-          '/signup': (context) => const SignupPage(),
+          // '/signup': (context) => const SignupPage(),
           // '/login': (context) => const LoginPage(),
           // '/
           // '/purchase': (context) => PaywallPage(),
