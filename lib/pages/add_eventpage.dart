@@ -1,19 +1,53 @@
+import 'package:eventgo/authantification/login_page.dart';
+import 'package:eventgo/authantification/signup_page.dart';
 import 'package:eventgo/screens/Help_page.dart';
 import 'package:eventgo/widgets/app_text.dart';
 import 'package:eventgo/widgets/app_text_large.dart';
 import 'package:eventgo/widgets/bouton_next.dart';
 import 'package:eventgo/widgets/constantes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddEvent extends StatefulWidget {
-  const AddEvent({super.key});
+  const AddEvent({Key? key}) : super(key: key);
 
   @override
   State<AddEvent> createState() => _AddEventState();
 }
 
 class _AddEventState extends State<AddEvent> {
+  User? user; // Variable pour stocker l'utilisateur connecté
+
+  @override
+  void initState() {
+    super.initState();
+    // Récupérer l'utilisateur connecté
+    user = FirebaseAuth.instance.currentUser;
+  }
+
+  Future<void> _logout() async {
+    try {
+      // Supprime le token FCM de l'utilisateur
+
+      // Déconnexion de Firebase
+      await FirebaseAuth.instance.signOut();
+
+      // Réinitialise l'état utilisateur
+      setState(() {
+        user = null;
+      });
+
+      // Redirection vers la page de connexion après la déconnexion
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const AddEvent()),
+      );
+    } catch (e) {
+      print('Erreur lors de la déconnexion : $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +56,15 @@ class _AddEventState extends State<AddEvent> {
         title: AppTextLarge(
           text: 'Vendre des Billets',
         ),
+        actions: [
+          // Afficher le bouton de déconnexion uniquement si l'utilisateur est connecté
+          if (user != null)
+            IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: _logout,
+              tooltip: 'Se déconnecter',
+            ),
+        ],
       ),
       body: Container(
         alignment: Alignment.center,
@@ -33,45 +76,67 @@ class _AddEventState extends State<AddEvent> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 const CircleAvatar(
+                  const CircleAvatar(
                     radius: 40,
                     backgroundColor: Colors.black12,
-                    child: Icon(CupertinoIcons.tickets_fill,color: Colors.grey,size: 40,),
-                  ),
-                  // SizedBox(
-                  //   height: 150.0,
-                  //   child: Image.asset('assets/ticket.png'),
-                  // ),
-                  AppTextLarge(
-                    text:
-                        "Connecte-toi ou crée un compte pour vendre tes billets en un clin d'oeil !",
-                    size: 16,
-                    textAlign: TextAlign.center,
-                  ),
-                  sizedbox,
-                  NextButton(
-                    color: Colors.black,
-                    width: 200,
-                    onTap: () {
-                      // showModalBottomSheet(
-                      //
-                      //   backgroundColor:
-                      //   Theme.of(context).colorScheme.background,
-                      //   context: context,
-                      //   isScrollControlled: true,
-                      //   builder: (BuildContext context) {
-                      //     return  Container(
-                      //         height:MediaQuery.of(context).size.height * 0.45,
-                      //         child: SignupPage());
-                      //   },
-                      // );
-                    },
-                    child: AppTextLarge(
-                      size: 14,
-                      text: "S'inscrire ou se connecter",
-                      color: Colors.white,
+                    child: Icon(
+                      CupertinoIcons.tickets_fill,
+                      color: Colors.grey,
+                      size: 40,
                     ),
                   ),
+                  if (user != null) ...[
+                    // Si l'utilisateur est connecté, afficher un message différent
+                    AppTextLarge(
+                      text: "Tu es déjà connecté !",
+                      size: 16,
+                      textAlign: TextAlign.center,
+                    ),
+                    sizedbox,
+                    NextButton(
+                      color: Colors.black,
+                      width: 200,
+                      onTap: () {
+                        Navigator.pushNamed(context,
+                            '/eventPage'); // Rediriger vers la page des événements
+                      },
+                      child: AppText(
+                        text: "Accéder à tes événements",
+                        color: Colors.white,
+                      ),
+                    ),
+                  ] else ...[
+                    // Si l'utilisateur n'est pas connecté, afficher le texte d'authentification
+                    AppTextLarge(
+                      text:
+                          "Connecte-toi ou crée un compte pour vendre tes billets en un clin d'oeil !",
+                      size: 16,
+                      textAlign: TextAlign.center,
+                    ),
+                    sizedbox,
+                    NextButton(
+                      color: Colors.black,
+                      width: 200,
+                      onTap: () {
+                        showModalBottomSheet(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (BuildContext context) {
+                            return Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.45,
+                                child: SignUpPage());
+                          },
+                        );
+                      },
+                      child: AppText(
+                        text: "S'inscrire ou se connecter",
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

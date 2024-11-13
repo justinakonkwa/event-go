@@ -1,17 +1,25 @@
 
 
+import 'package:eventgo/authantification/main_page.dart';
 import 'package:eventgo/intro/Intro.dart';
 import 'package:eventgo/language/language_preferences.dart';
+import 'package:eventgo/menu_page.dart';
+import 'package:eventgo/pages/add_eventpage.dart';
+import 'package:eventgo/pages/homepage.dart';
 import 'package:eventgo/widgets/theme_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'; // Add this line
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'firebase_options.dart'; // Add this line
 
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Ensure plugin services are initialized
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? savedLanguage = prefs.getString('language');
@@ -63,11 +71,12 @@ class _MyAppState extends State<MyApp> {
         locale: localizationDelegate.currentLocale,
         theme: Provider.of<Themeprovider>(context).themeData,
         debugShowCheckedModeBanner: false,
-        initialRoute: '/intro',
+        initialRoute: '/home',
         routes: {
+          '/home':(context)=> AuthVerification(),
           '/intro': (context) => const Intro(),
-          // '/signup': (context) => const SignupPage(),
-          // '/login': (context) => const LoginPage(),
+          '/signup': (context) => const MainPage(),
+          '/addevent': (context) => const AddEvent(),
           // '/
           // '/purchase': (context) => PaywallPage(),
           // '/schedule': (context) => const SchedulePage(),

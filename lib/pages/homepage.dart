@@ -30,29 +30,32 @@ class _HomePageState extends State<HomePage> {
                 left: 20.0,
                 right: 20.0,
               ),
-              child: CupertinoTextField(
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-                keyboardType: TextInputType.text,
-                placeholder: 'Recherche des artistes, lieux, événements...',
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                prefix: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(
-                    CupertinoIcons.search,
+              child: Container(
+                height: 45,
+                child: CupertinoTextField(
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  keyboardType: TextInputType.text,
+                  placeholder: 'Recherche des artistes, lieux, événements...',
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  prefix: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(
+                      CupertinoIcons.search,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
-        body: ListView(
-          children: [Padding(
+        body: ListView(children: [
+          Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,12 +66,14 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     EventCard(
                       text: "Aujourd'hui",
-                      icon: Icons.calendar_today,color: Colors.blue,
+                      icon: Icons.calendar_today,
+                      color: Colors.blue,
                     ),
                     Spacer(),
                     EventCard(
                       text: "Demain",
-                      icon: Icons.calendar_today,color: Colors.orange,
+                      icon: Icons.calendar_today,
+                      color: Colors.orange,
                     ),
                   ],
                 ),
@@ -77,13 +82,14 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     EventCard(
                       text: "Ce week-end",
-                      icon: CupertinoIcons.calendar_today,color: Colors.green,
+                      icon: CupertinoIcons.calendar_today,
+                      color: Colors.green,
                     ),
                     Spacer(),
                     EventCard(
-                      text: "Tous événements",
-                      icon: CupertinoIcons.calendar,color: Colors.red
-                    ),
+                        text: "Tous événements",
+                        icon: CupertinoIcons.calendar,
+                        color: Colors.red),
                   ],
                 ),
                 SizedBox(height: 20),
@@ -106,13 +112,10 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             width: MediaQuery.of(context).size.width *
                                 0.8, // Width of the container
-                            height: MediaQuery.of(context).size.width * 0.5,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal:
-                                    8.0),
+                            height: MediaQuery.of(context).size.width * 0.48,
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
                             decoration: BoxDecoration(
-                              color: Colors.grey[
-                                  200],
+                              color: Colors.grey[200],
                               borderRadius:
                                   BorderRadius.circular(20), // Rounded corners
                             ),
@@ -123,7 +126,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           AppText(
-                            text: 'Double stade de France avec le rappeur Ninho',
+                            text:
+                                'Double stade de France avec le rappeur Ninho',
                           ),
                         ],
                       );
@@ -144,7 +148,7 @@ class EventCard extends StatelessWidget {
   final IconData icon;
   final Color? color;
   // Constructor to initialize parameters
-  EventCard({required this.text, required this.icon,  this.color});
+  EventCard({required this.text, required this.icon, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -164,8 +168,10 @@ class EventCard extends StatelessWidget {
         children: [
           Flexible(child: AppText(text: text)),
           SizedBox(width: 10),
-          Icon(icon,color: color,),
-
+          Icon(
+            icon,
+            color: color,
+          ),
         ],
       ),
     );
